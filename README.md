@@ -1,0 +1,2 @@
+# shikong is baka
+
