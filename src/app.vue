@@ -1,36 +1,19 @@
 <template>
-  <div class="main container">
-    <input type="text" v-model="text" />
-    <div class="hello">Hello {{ text }}!</div>
-    <div class="text-center">
-      <dropdown>
-        <button type="button" class="btn btn-success" data-toggle="dropdown">
-          Welcome
-          <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu">
-          <li><a href="#">Action</a></li>
-          <li><a href="#">Another action</a></li>
-          <li><a href="#">Something else here</a></li>
-          <li role="separator" class="divider"></li>
-          <li><a href="#">Separated link</a></li>
-        </ul>
-      </dropdown>
-    </div>
-  </div>
+  <div class="message">{{msg}}</div>
 </template>
-
 <script>
-  import { dropdown } from 'vue-strap/dist/vue-strap.js'
   export default {
-    replace: false,
-  	data() {
+    data () {
       return {
-        text: 'vue'
+        msg: 'Hello from vue-loader'
       }
-    },
-    components: {
-      dropdown
-    },
+    }
   }
 </script>
+<style>
+  .message{
+    color:red;
+    font-size:36px;
+    font-weight:blod;
+  }
+</style>

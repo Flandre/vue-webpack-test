@@ -1,24 +1,50 @@
+var path = require('path');
 module.exports = {
-  entry: {
-    app: './src/main.js'
-  },
+  entry: './src/main.js',
   output: {
-    path: './build',
-    publicPath: '/build/',
-    filename: 'bundle.js'
+    path: './dist',
+    publicPath:'dist/',
+    filename: 'build.js'
   },
+  //配置自动刷新,如果打开会使浏览器刷新而不是热替换
+  /*devServer: {
+   historyApiFallback: true,
+   hot: false,
+   inline: true,
+   grogress: true
+   },*/
   module: {
     loaders: [
-      { test: /\.vue$/, loader: 'vue' },
-      { test: /\.js$/, exclude: /node_modules/, loader: 'babel'},
-      { test: /\.(png|jpg)$/, loader: 'file' },
-      { test: /\.(png|jpg)$/, loader: 'url?limit=10000'},
-      { test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/font-woff' },
-      { test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/octet-stream' },
-      { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file' },
-      { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=image/svg+xml' },
-      { test: /\.css$/, loader: 'style-loader!css-loader' }
+      //转化ES6语法
+      {
+        test: /\.js$/,
+        loader: 'babel',
+        exclude: /node_modules/
+      },
+      //解析.vue文件
+      {
+        test:/\.vue$/,
+        loader:'vue'
+      },
+      //图片转化，小于8K自动转化为base64的编码
+      {
+        test: /\.(png|jpg|gif)$/,
+        loader:'url-loader?limit=8192'
+      }
     ]
   },
-  devtool: '#source-map'
+  vue:{
+    loaders:{
+      js:'babel'
+    }
+  },
+  resolve: {
+    // require时省略的扩展名，如：require('app') 不需要app.js
+    extensions: ['', '.js', '.vue'],
+    // 别名，可以直接使用别名来代表设定的路径以及其他
+    alias: {
+      filter: path.join(__dirname, './src/filters'),
+      components: path.join(__dirname, './src/components')
+    }
+  }
 }
